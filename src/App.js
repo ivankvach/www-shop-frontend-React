@@ -1,14 +1,15 @@
 import './App.css';
-import { Routes, Route, Link } from "react-router-dom";
+import { Routes, Route} from "react-router-dom";
 import {Home} from "./components/Home";
 import {Header} from "./components/Header";
-import {Banner} from "./components/Banner";
-import {AboutUs} from "./components/AboutUs";
-import {Product} from "./components/Product";
-import {Subscribe} from "./components/Subscribe"
-import {Testimonial} from "./components/Testimonial";
-import {Footer} from "./components/Footer";
+import {AboutPage} from "./components/AboutPage";
+import {ProductPage} from "./components/ProductPage";
+import {BlogPage} from "./components/BlogPage";
+import {ContactPage} from "./components/ContactPage";
+import {TestimonialPage} from "./components/TestimonialPage";
+import {BasketPage} from "./components/BasketPage";
 import {FooterBased} from "./components/FooterBased";
+
 
 function App() {
   return (
@@ -16,17 +17,13 @@ function App() {
       <Header/>
        <Routes>
         <Route path="/" element={<Home/>}/>
-        <Route path="product.html" element={<Product/>}/>
-        <Route path="about.html" element={<AboutUs />} />
+        <Route path="product.html" element={<ProductPage/>}/>
+        <Route path="about.html" element={<AboutPage />} />
+        <Route path="testimonial.html" element={<TestimonialPage />} />
+        <Route path="blog_list.html" element={<BlogPage />} />
+        <Route path="contact.html" element={<ContactPage />} />
+        <Route path="basket.html" element={<BasketPage/>} />
       </Routes>
-      {/* <Header/>
-      <Banner/>
-      <AboutUs/>
-      <Product/>
-      <Subscribe/>
-      <Testimonial/>
-      <Footer/>
-      <FooterBased/> */}
       <FooterBased/>
     </div>
   );
