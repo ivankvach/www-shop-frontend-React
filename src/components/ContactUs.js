@@ -1,11 +1,130 @@
-import logo from "../images/arrival-bg.png"
+import logo from "../images/arrival-bg.png";
+import {useState, useEffect} from "react";
+import { Modal, Button, Form } from 'react-bootstrap'
 
 export const ContactUs = () => {
+
+//Set token
+
+   const [token, setToken] = useState(localStorage.getItem("token"));
+   console.log(token)
+//Send and check StatusText from server and Access, and Set token to Local Storage
+
+   const [items, setItems] = useState("");
+   useEffect(() => {
+     fetch("http://localhost:3000/products", {
+      method: 'GET',
+      headers: {                   
+         'Authorization': 'Bearer' + " " + token
+       }
+      })
+       .then(res => res)
+       .then(result => setItems((result.statusText)))
+   }, [token])
+   localStorage.setItem('token', token)
+console.log(items)
+const [show, setShow] = useState(false);
+
+//Turns the modal window
+
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
+  useEffect(() => {
+     if (items === "Unauthorized") {
+  handleShow()
+     } else {
+      handleClose();
+     }
+}, [items])
+
+//Get input values from login
+
+const [userName, setUserName] = useState({});
+
+const handleInputChange = (event) => {
+   const target = event.target;
+   const value = target.value;
+   const name = target.name
+   setUserName({
+      ...userName,
+      [name]: value});
+}
+
+console.log(userName)
+
+//Send login
+
+const handleSubmit = () => {
+   console.log("Current State is:" + JSON.stringify(userName));
+   alert("Current State is:" + JSON.stringify(userName))
+   //event.preventDefault;
+   fetch("http://localhost:3000/users/login", {
+  method: 'POST',
+  headers: {
+         'Content-Type': 'application/json'
+        // 'Access-Control-Allow-Origin': true
+  },
+  body: JSON.stringify(userName),
+   credentials: "same-origin"
+
+})
+   .then(res => res.json())
+   .then(data => setToken(data.token))
+}
+
+console.log(token)
+
     return(
-        <div>
-      <section className="why_section layout_padding">
+         <div>
+      {/* {items.length !== "Unauthorized" : setShow(true); } */}
+
+     <Button variant="primary" onClick={handleShow}>
+        Launch demo modal
+      </Button>
+
+
+      <Modal show={show} onHide={handleClose}>
+        <Modal.Header closeButton>
+          <Modal.Title>Log In</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          <Form onSubmit={handleSubmit}>
+            <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
+              <Form.Label>Username</Form.Label>
+              <Form.Control
+                name="username"
+                type="username"
+                placeholder="username"
+                value={userName.username}
+                onChange={handleInputChange}
+                autoFocus
+              />
+            </Form.Group>
+            <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
+              <Form.Label>Password</Form.Label>
+              <Form.Control
+                name="password"
+                type="password"
+                placeholder="your password"
+                value={userName.password}
+                onChange={handleInputChange}
+                autoFocus
+              />
+            </Form.Group>
+          </Form>
+        </Modal.Body>
+        <Modal.Footer>
+          <Button variant="secondary" onClick={handleClose}>
+            Close
+          </Button>
+          <Button variant="primary" onClick={handleSubmit}>
+            Log In
+          </Button>
+        </Modal.Footer>
+      </Modal>
+
+     <section className="why_section layout_padding">
          <div className="container">
-         
             <div className="row">
                <div className="col-lg-8 offset-lg-2">
                   <div className="full">
@@ -19,7 +138,7 @@ export const ContactUs = () => {
                         </fieldset>
                      </form>
                   </div>
-               </div>
+               </div> 
             </div>
          </div>
       </section>
