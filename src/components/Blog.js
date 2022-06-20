@@ -1,6 +1,31 @@
+import {useState, useEffect} from 'react';
+
 export const Blog = () => {
+
+const [chat, setChat] = useState([])
+useEffect (() => {
+   fetch("http://localhost:3000/chat")
+   .then(res => res.json())
+   .then(data => console.log(data)) 
+}, [])
+
+
+
+
     return(
         <div>
+            <div className="container"> hello
+               {chat.map((chat) => 
+               <div className="row">
+                  <div className="col-12">
+                     <h1>{chat.author}</h1>
+                     <a>{chat.message}</a>
+                  </div>
+               </div>
+               )}
+            </div>
+
+
             <section className="inner_page_head">
          <div className="container_fuild">
             <div className="row">

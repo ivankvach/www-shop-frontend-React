@@ -13,6 +13,7 @@ export const Header = () => {
 
 const [token, setToken] = useState(localStorage.getItem("token"));
 console.log(token)
+
 //Send and check StatusText from server and Access, and Set token to Local Storage
 
 const [items, setItems] = useState("");
@@ -29,6 +30,7 @@ useEffect(() => {
 localStorage.setItem('token', token)
 console.log(items)
 
+//Check LogIn
 
 const [logIn, setLogIn] = useState()
 useEffect(() => {
@@ -92,6 +94,8 @@ credentials: "same-origin"
 
 console.log(token)
 
+//Get items from author (usename)
+
 useEffect(() => {
    //fetch("http://localhost:3000/basket")
    fetch("http://localhost:3000/basket", {
@@ -105,14 +109,45 @@ useEffect(() => {
 }, [token])
 
 const logOut = () => {
-   setToken("")
+   setToken("");
+   handleClose();
 }
 
-//Turns the modal window
-// const [showSign, setShowSign] = useState(false);
-// const handleCloseSign = () => setShowSign(false);
-// const handleShowSign = () => setShowSign(true);
+//Turns the modal window of SignUp
 
+const [showSign, setShowSign] = useState(false);
+const handleCloseSign = () => setShowSign(false);
+const handleShowSign = () => setShowSign(true);
+
+const [signName, setSignName] = useState({});
+
+const handleInputChangeSign = (event) => {
+  const target = event.target;
+  const value = target.value;
+  const name = target.name
+  setSignName({
+     ...signName,
+     [name]: value});
+     //localStorage.setItem("username", userName.username)
+  }
+
+const handleSubmitSign = () => {
+  console.log("Current State is:" + JSON.stringify(signName));
+alert("Current State is:" + JSON.stringify(signName))
+//event.preventDefault;
+fetch("http://localhost:3000/users/signup", {
+method: 'POST',
+headers: {
+      'Content-Type': 'application/json'
+     // 'Access-Control-Allow-Origin': true
+},
+body: JSON.stringify(signName),
+credentials: "same-origin"
+
+})
+.then(res => res.json())
+.then(data => console.log(data))
+}
 
 
     return(
@@ -165,19 +200,41 @@ const logOut = () => {
 
 {/* Modal Sign in */}
 
-      {/* <Modal show={showSign} onHide={handleCloseSign}>
+       <Modal show={showSign} onHide={handleCloseSign}>
         <Modal.Header closeButton>
           <Modal.Title>Sign In</Modal.Title>
         </Modal.Header>
         <Modal.Body>
           <Form onSubmit={handleSubmitSign}>
+          <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
+              <Form.Label>Firstname</Form.Label>
+              <Form.Control
+                name="firstname"
+                type="firstname"
+                placeholder="firstname"
+                value={signName.firstname}
+                onChange={handleInputChange}
+                autoFocus
+              />
+            </Form.Group>
+            <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
+              <Form.Label>Lastname</Form.Label>
+              <Form.Control
+                name="lastname"
+                type="lastname"
+                placeholder="lastname"
+                value={signName.lastname}
+                onChange={handleInputChange}
+                autoFocus
+              />
+            </Form.Group>
             <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
               <Form.Label>Username</Form.Label>
               <Form.Control
                 name="username"
                 type="username"
                 placeholder="username"
-                value={userName.username}
+                value={signName.username}
                 onChange={handleInputChangeSign}
                 autoFocus
               />
@@ -188,7 +245,7 @@ const logOut = () => {
                 name="password"
                 type="password"
                 placeholder="your password"
-                value={userName.password}
+                value={signName.password}
                 onChange={handleInputChangeSign}
                 autoFocus
               />
@@ -203,7 +260,7 @@ const logOut = () => {
             Sign In
           </Button>
         </Modal.Footer>
-      </Modal> */}
+      </Modal>
 
 
 
@@ -230,7 +287,7 @@ const logOut = () => {
                            <a className="nav-link" href="product.html">Products</a>
                         </li>
                         <li className="nav-item">
-                           <a className="nav-link" href="blog_list.html">Blog</a>
+                           <a className="nav-link" href="blog_list.html">Chat</a>
                         </li>
                         <li className="nav-item">
                            <a className="nav-link" href="contact.html">Contact</a>
@@ -251,7 +308,7 @@ const logOut = () => {
                         </Button>
                         </li>
                         <li className="nav-item">
-                        <Button id="signup" variant="primary" onClick={handleShow}>
+                        <Button id="signup" variant="primary" onClick={handleShowSign}>
                               Sign Up
                         </Button>
                         </li>

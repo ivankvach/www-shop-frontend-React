@@ -1,6 +1,7 @@
 import {useState, useEffect} from "react";
 import { useSelector, useDispatch } from 'react-redux';
-import { increment, decrement, deleteItems } from "../actions";
+import { decrement, deleteItems } from "../actions";
+import { Modal, Button, Form } from 'react-bootstrap'
 // import { Modal, Button, Form } from 'react-bootstrap'
 
 //import { createStore } from 'redux';
@@ -142,6 +143,8 @@ export const Basket = () => {
   }, [counter])
   console.log(items)
   console.log(delItem)
+
+  
   const deleteItem = (item) => {
     fetch("http://localhost:3000/basket/" + item._id, {
   method: 'DELETE',
@@ -237,7 +240,19 @@ useEffect(() => {
 
 
 
-console.log(items.findIndex((element) => element.title === "Black shirt"))
+//console.log(items.findIndex((element) => element.title === "Black shirt"))
+
+const sendOrder = () => {
+  alert(JSON.stringify(items))
+  fetch("http://localhost:3000/basket", {
+    method: 'DELETE'
+  })
+     .then(res => res)
+     .then(data => console.log(data))
+    //  setDeleteItem(item._id)
+    //  console.log(item._id)
+    dispatch(decrement([]))
+}
 
     return(
 
@@ -303,6 +318,13 @@ console.log(items.findIndex((element) => element.title === "Black shirt"))
       <td>@twitter</td>
     </tr> */}
   </tbody>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+  <td><Button variant="primary" onClick={sendOrder}>Send order</Button></td>
 </table>
 
 : <h1 id="yourbasket">...is empty</h1>

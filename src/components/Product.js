@@ -107,7 +107,7 @@ export const Product = () => {
                             <a href="" className="option1">
                             {item.title}
                             </a>
-                            <a href="" onClick={() => sendToBasket(item)} className="option2">
+                            <a onClick={() => sendToBasket(item)} className="option2">
                             Buy Now
                             </a>
                          </div>
@@ -124,7 +124,7 @@ export const Product = () => {
                          </h6>
                       </div>
                    </div>
-                   <button onClick={() => sendToBasket(item)}>buy</button>
+                   {/* <button onClick={() => sendToBasket(item)}>buy</button> */}
                 </div>
                )}
 
