@@ -237,7 +237,18 @@ useEffect(() => {
 // };
 // console.log(filterArray([{"d":"q"}, {"d": "q"}, {"f": "q"}], 0))
 
+const [countItems, setCountItems] = useState({})
 
+useEffect(() => {
+ const itemsNew = items.map((item) => item.title)
+  const map = itemsNew.reduce((prev, cur) => {
+    prev[cur] = (prev[cur] || 0) +1;
+    return prev;
+  }, {})
+  console.log(map)
+   setCountItems(map)  
+}, [items])
+console.log(countItems["Black shirt"])
 
 
 //console.log(items.findIndex((element) => element.title === "Black shirt"))
@@ -283,7 +294,7 @@ const sendOrder = () => {
       <td>{item.title}</td>
       <td><img src={require('../images/' + item.images + '.png')} style={size} alt=""/></td>
       <td>{item.description}</td>
-      <td>{items.length}</td>
+      <td>{countItems[item.title]}</td>
       <td>{parseInt(item.price)}</td>
       <td><button type="button" class="btn btn-info" onClick={() => deleteItem(item) }>X</button></td>
     </tr>

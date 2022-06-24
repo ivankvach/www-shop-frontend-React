@@ -1155,6 +1155,18 @@ form input[type="submit"]:focus {
 #signup {
   margin-left: 15px;
 }
+#chat {
+    flex: 0 0 100%;
+    max-width: 100%;
+    background: #abcdd7;
+    border-radius: 25px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+.input-group {
+  margin-bottom: 20px;
+}
+
 /* @media (min-width: 768px)  {
 .offset-md-3 {
     margin-left: 0%;

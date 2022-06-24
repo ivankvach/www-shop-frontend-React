@@ -147,6 +147,7 @@ credentials: "same-origin"
 })
 .then(res => res.json())
 .then(data => console.log(data))
+setShowSign(false);
 }
 
 

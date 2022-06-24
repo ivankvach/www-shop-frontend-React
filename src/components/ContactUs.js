@@ -78,11 +78,7 @@ console.log(token)
          <div>
       {/* {items.length !== "Unauthorized" : setShow(true); } */}
 
-     <Button variant="primary" onClick={handleShow}>
-        Launch demo modal
-      </Button>
-
-
+     
       <Modal show={show} onHide={handleClose}>
         <Modal.Header closeButton>
           <Modal.Title>Log In</Modal.Title>

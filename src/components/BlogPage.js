@@ -33,6 +33,7 @@ export const BlogPage = () => {
         })
         .then(res => res.json())
         .then(data => setCountClick(countClick + 1))
+        //console.log(getDate('2016-11-16T12:59:59'))
      }
      
      // const deleteMessage = (chatt) => {
@@ -43,18 +44,27 @@ export const BlogPage = () => {
      //    .then(res => res.json())
      //    .then(data => console.log(data))
      // }     
-
+     var options = { hour12: false };
     return(
          <>
          <HeadingComponents heading={Heading}/>
 
-         <div className="container">
+         <div className="container" >
                {chat.map((chatt) => 
                <div className="row">
-                  <div className="col-12">
-                     <h4>{chatt.author}</h4>
+                  <div className="col-12" id="chat">
+                     <h5>{chatt.author}</h5>
                      <a>{chatt.message}</a>
-                     <h6>{chatt.date}</h6>
+                     <h6>{new Date(chatt.date).toLocaleString('ru-RU', {
+                           timeZone: 'Europe/Kiev',
+                           hourCycle: 'h23',
+                           year: "numeric",
+                           month: "2-digit",
+                           day: "2-digit",
+                           hour: "2-digit",
+                           minute: "2-digit",
+                           second: "2-digit"
+                     })}</h6>
                      {/* <Button variant="primary" onClick={deleteMessage(chatt)}>X</Button> */}
                   </div>
                </div>
