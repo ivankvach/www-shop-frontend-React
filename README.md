@@ -1,3 +1,13 @@
+![Alt text](./src/images/view-1.png "Optional title")
+![Alt text](./src/images/view_2.png "Optional title")
+![Alt text](./src/images/view_3.png "Optional title")
+![Alt text](./src/images/view_4.png "Optional title")
+![Alt text](./src/images/view_5.png "Optional title")
+![Alt text](./src/images/view_6.png "Optional title")
+![Alt text](./src/images/view_7.png "Optional title")
+![Alt text](./src/images/view_8.png "Optional title")
+![Alt text](./src/images/view_10.png "Optional title")
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).

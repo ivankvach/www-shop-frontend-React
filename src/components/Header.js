@@ -157,8 +157,12 @@ setShowSign(false);
 {/* //Modal Login */}
 
       <Modal show={show} onHide={handleClose}>
-        <Modal.Header closeButton>
+        <Modal.Header>
           <Modal.Title>Log In</Modal.Title>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close" onClick={handleClose}>
+          <span aria-hidden="true">&times;</span>
+        </button>
+    
         </Modal.Header>
         <Modal.Body>
           <Form onSubmit={handleSubmit}>
@@ -202,8 +206,11 @@ setShowSign(false);
 {/* Modal Sign in */}
 
        <Modal show={showSign} onHide={handleCloseSign}>
-        <Modal.Header closeButton>
+        <Modal.Header>
           <Modal.Title>Sign In</Modal.Title>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close" onClick={handleCloseSign}>
+          <span aria-hidden="true">&times;</span>
+        </button>
         </Modal.Header>
         <Modal.Body>
           <Form onSubmit={handleSubmitSign}>
